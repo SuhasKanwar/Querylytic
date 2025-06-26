@@ -9,7 +9,7 @@ jobs:
   sync-to-hub:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           lfs: false
@@ -18,4 +18,6 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-        run: git push --force https://SuhasKanwar:$HF_TOKEN@huggingface.co/spaces/SuhasKanwar/Querylytic main
+        run: |
+          git remote add hf https://SuhasKanwar:$HF_TOKEN@huggingface.co/spaces/SuhasKanwar/Querylytic
+          git push hf main --force
